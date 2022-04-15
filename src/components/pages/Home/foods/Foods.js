@@ -132,17 +132,21 @@ const foods = [
 ];
 
 const breakfasts = foods.filter(food => food.name.includes("breakfast"));
-const lunches = foods.filter(food => food.name.includes("lunch"));
-const dinners = foods.filter(food => food.name.includes("dinner"));
 
 const Foods = () => {
     const [selectedFoodClass, setSelectedFoodClass] = useState(breakfasts);
+
+    const handleChangeFoodClass = (foodClass) => {
+        const selectedFoods = foods.filter(food => food.name.includes(foodClass));
+        setSelectedFoodClass(selectedFoods);
+    }
+
     return (
         <div>
             <div className='w-1/3 mx-auto flex justify-around my-5 text-xl font-semibold'>
-                <button onClick={() => setSelectedFoodClass(breakfasts)}>Breakfast</button>
-                <button onClick={() => setSelectedFoodClass(lunches)}>Lunch</button>
-                <button onClick={() => setSelectedFoodClass(dinners)}>Dinner</button>
+                <p onClick={() => handleChangeFoodClass("breakfast")}>Breakfast</p>
+                <p onClick={() => handleChangeFoodClass("lunch")}>Lunch</p>
+                <p onClick={() => handleChangeFoodClass("dinner")}>Dinner</p>
             </div>
             <div className='w-3/4 mx-auto grid grid-cols-3 gap-5 place-items-center'>
                 {
