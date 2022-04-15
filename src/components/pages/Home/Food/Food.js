@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Dinner = ({dinner}) => {
-    const {name, img, price} = dinner;
+const Food = ({ selectedFood }) => {
+    const { name, img, price } = selectedFood;
     return (
         <div>
             <img className='w-80' src={img} alt="" />
@@ -11,4 +11,4 @@ const Dinner = ({dinner}) => {
     );
 };
 
-export default Dinner;
+export default Food;
