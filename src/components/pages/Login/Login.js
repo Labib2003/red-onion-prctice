@@ -4,7 +4,7 @@ import logo from '../../../red-onion/images/logo2.png';
 
 const Login = () => {
     return (
-        <div className='w-1/2 mx-auto'>
+        <div className='w-1/3 mx-auto'>
             <img className='w-2/6 mx-auto mb-10' src={logo} alt="" />
             <form className='flex flex-col space-y-3 w-full mx-auto'>
                 <input className='border border-gray-400 rounded-md text-xl p-3' type="email" placeholder='Email'/>
