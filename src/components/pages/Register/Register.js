@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import logo from '../../../red-onion/images/logo2.png'
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 
 const Register = () => {
     const [
@@ -10,8 +10,7 @@ const Register = () => {
         user,
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
-    const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
+    const [updateProfile] = useUpdateProfile(auth);
     const nameRef = useRef("");
     const emailRef = useRef("");
     const passwordRef = useRef("");
@@ -33,10 +32,7 @@ const Register = () => {
             alert("Password did not match");
         };
     };
-    const handleGoogleSignIn = () => {
-        signInWithGoogle();
-    };
-    if (user || googleUser) {
+    if (user) {
         navigate('/');
         console.log(user);
     };
@@ -53,8 +49,7 @@ const Register = () => {
                     <p className='text-red-500 font-semibold'>{error ? error.message : ''}</p>
                     <input className='w-full bg-red-500 hover:bg-red-600 rounded-md p-3 text-white' type="submit" value="Register" />
                 </form>
-                <button onClick={handleGoogleSignIn} className='w-full bg-red-500 hover:bg-red-600 rounded-md p-3 text-white my-5'>Continue with Google</button>
-                <p>Already have an account? <Link className='text-red-500' to='/login'>Login</Link></p>
+                <p className='mt-5'>Already have an account? <Link className='text-red-500' to='/login'>Login</Link></p>
             </div>
         </div>
     );
