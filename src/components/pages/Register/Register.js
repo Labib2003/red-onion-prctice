@@ -2,14 +2,15 @@ import React, { useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import logo from '../../../red-onion/images/logo2.png'
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 
 const Register = () => {
     const [
         createUserWithEmailAndPassword,
         user,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [signInWithGoogle, googleUser] = useSignInWithGoogle(auth);
     const nameRef = useRef("");
     const emailRef = useRef("");
@@ -17,14 +18,16 @@ const Register = () => {
     const confirmPasswordRef = useRef("");
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const name = nameRef.current.value;
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         const confirmPassword = confirmPasswordRef.current.value;
+
         if (password === confirmPassword) {
-            createUserWithEmailAndPassword(email, password);
+            await createUserWithEmailAndPassword(email, password);
+            await updateProfile({ displayName: name });
         }
         else {
             alert("Password did not match");
@@ -35,8 +38,9 @@ const Register = () => {
     };
     if (user || googleUser) {
         navigate('/');
+        console.log(user);
     };
-    
+
     return (
         <div>
             <div className='w-1/3 mx-auto'>

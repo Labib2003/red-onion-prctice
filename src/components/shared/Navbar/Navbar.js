@@ -18,10 +18,11 @@ const Navbar = () => {
                 <img className='h-12' src={logo} alt="" />
             </Link>
             <div className='flex text-lg'>
-                <Link to='/cart' className='my-auto'>Cart</Link>
+                <p className='my-auto' >{user ? `Welcome ${user.displayName}!` : ''}</p>
+                <Link to='/cart' className='my-auto ml-5'>Cart</Link>
                 {
                     user ?
-                    <button onClick={handleSignOut} className='bg-red-500 rounded-full px-7 py-1 ml-5 my-auto text-white hover:bg-red-600'>Logout</button>
+                        <button onClick={handleSignOut} className='bg-red-500 rounded-full px-7 py-1 ml-5 my-auto text-white hover:bg-red-600'>Logout</button>
                         :
                         <div className='my-auto'>
                             <Link to='/login' className='ml-5'>Login</Link>
