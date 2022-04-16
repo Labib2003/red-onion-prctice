@@ -14,15 +14,15 @@ const Login = () => {
     const emailRef = useRef();
     const passwordRef = useRef();
     const navigate = useNavigate();
-    
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const email = emailRef.current.value;
         const password = passwordRef.current.value;
         signInWithEmailAndPassword(email, password);
-        if (user) {
-            navigate('/');
-        }
+    }
+    if (user) {
+        navigate('/');
     }
 
     return (
@@ -32,7 +32,7 @@ const Login = () => {
                 <input ref={emailRef} className='border border-gray-400 rounded-md text-xl p-3' type="email" placeholder='Email' />
                 <input ref={passwordRef} className='border border-gray-400 rounded-md text-xl p-3' type="password" placeholder='Password' />
                 <p className='text-red-500 font-semibold'>{error ? error.message : ''}</p>
-                <input className='w-full bg-red-500 rounded-md p-3 text-white' type="submit" value="Login" />
+                <input className='w-full bg-red-500 hover:bg-red-600 rounded-md p-3 text-white' type="submit" value="Login" />
             </form>
             <p className='mt-5'>New to Red Onion? <Link className='text-red-500' to='/register'>Register</Link></p>
         </div>
