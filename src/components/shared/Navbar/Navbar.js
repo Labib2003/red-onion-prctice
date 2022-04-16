@@ -14,17 +14,18 @@ const Navbar = () => {
 
     return (
         <nav className='w-4/5 mx-auto my-5 flex justify-between'>
-            <button to='/'>
+            <Link to='/'>
                 <img className='h-12' src={logo} alt="" />
-            </button>
+            </Link>
             <div className='flex text-lg'>
+                <Link to='/cart' className='my-auto'>Cart</Link>
                 {
                     user ?
                     <button onClick={handleSignOut} className='bg-red-500 rounded-full px-7 py-1 ml-5 my-auto text-white hover:bg-red-600'>Logout</button>
                         :
-                        <div>
-                            <Link to='/login' className='my-auto'>Login</Link>
-                            <Link to='/register' className='bg-red-500 rounded-full px-7 py-1 ml-5 my-auto text-white hover:bg-red-600'>Sign Up</Link>
+                        <div className='my-auto'>
+                            <Link to='/login' className='ml-5'>Login</Link>
+                            <Link to='/register' className='bg-red-500 rounded-full px-7 py-1 ml-5 text-white hover:bg-red-600'>Sign Up</Link>
                         </div>
                 }
             </div>
